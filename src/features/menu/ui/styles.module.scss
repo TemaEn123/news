@@ -1,0 +1,25 @@
+.menu {
+  font-family: Roboto;
+  padding: 10px 0;
+  border-bottom: 2px dotted #ededed;
+  &__link {
+    color: #000;
+    transition: opacity 0.3s ease 0s;
+    &:hover {
+      opacity: 0.6;
+    }
+    &_active {
+      opacity: 0.6;
+    }
+  }
+  & ul {
+    display: flex;
+    justify-content: center;
+    & li {
+      text-transform: capitalize;
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+}
