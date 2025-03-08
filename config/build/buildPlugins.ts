@@ -7,6 +7,7 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import path from "path";
 import CopyPlugin from "copy-webpack-plugin";
+import Dotenv from "dotenv-webpack"
 
 export function buildPlugins({
   mode,
@@ -23,6 +24,7 @@ export function buildPlugins({
       __PLATFORM__: JSON.stringify(platform),
       __ENV__: JSON.stringify(mode),
     }),
+    new Dotenv(),
   ];
 
   if (isDev) {

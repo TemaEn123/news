@@ -1,4 +1,4 @@
-export type ICategories = [
+export type ICategories = readonly [
   'business',
   'entertainment',
   'general',
