@@ -1,0 +1,9 @@
+.news {
+  flex: 1 1 50%;
+  margin-right: 30px;
+  &__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px;
+  }
+}

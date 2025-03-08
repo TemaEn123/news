@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  align-items: center;
+  line-height: 140%;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  &__img {
+    flex: 0 0 30%;
+    padding-bottom: 20%;
+    margin-right: 10px;
+    position: relative;
+  }
+  &__info {
+    flex: 0 0 70%;
+    & h2 {
+      font-size: 14px;
+      margin-bottom: 5px;
+      line-height: 160%;
+    }
+  }
+  &__description {
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 5px;
+    color: #4f4f4f;
+  }
+  &__about {
+    color: #4f4f4f;
+    & span {
+      font-size: 10px;
+      &:not(:first-child) {
+        margin-left: 5px;
+      }
+    }
+  }
+}

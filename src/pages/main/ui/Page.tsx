@@ -1,7 +1,8 @@
+import { News } from '@/widgets/news';
 import React from 'react';
 
 const MainPage = () => {
-  return <div>MainPage</div>;
+  return <News />;
 };
 
 export default MainPage;
