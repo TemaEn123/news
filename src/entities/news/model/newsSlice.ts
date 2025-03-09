@@ -1,6 +1,6 @@
 import { RootState } from '@/app/AppStore';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IFilters, INews } from './interfaces';
+import { Category, IFilters, INews } from './interfaces';
 import { getDayBeforeYesterday } from '@/shared/helpers/getDayBeforeYesterday';
 import { LANGUAGE, PAGE_SIZE_LATEST, PAGE_SIZE_TOP, SORT_BY } from '@/shared/constants';
 
@@ -16,7 +16,6 @@ const initialState: INewsState = {
   topNews: [],
   currentNews: null,
   filters: {
-    page: 1,
     pageSizeTop: PAGE_SIZE_TOP,
     pageSizeLatest: PAGE_SIZE_LATEST,
     language: LANGUAGE,
@@ -40,8 +39,12 @@ export const newsSlice = createSlice({
     setCurrentNews: (state, action: PayloadAction<INews>) => {
       state.currentNews = action.payload;
     },
-    setFilters: (state, action: PayloadAction<IFilters>) => {
-      state.filters = action.payload;
+    setFilters: (state, action: PayloadAction<['q' | 'category', Category | 'in']>) => {
+      if (action.payload[1] === 'in') {
+        state.filters['q'] = action.payload[1];
+      } else {
+        state.filters[action.payload[0]] = action.payload[1];
+      }
     },
   },
 });

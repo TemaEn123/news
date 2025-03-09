@@ -21,6 +21,7 @@ export const newsApi = createApi({
           },
         };
       },
+      keepUnusedDataFor: 0,
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         const result = await queryFulfilled;
         const data = result.data;
@@ -41,6 +42,7 @@ export const newsApi = createApi({
           },
         };
       },
+      keepUnusedDataFor: 0,
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         const result = await queryFulfilled;
         const data = result.data;
