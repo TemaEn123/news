@@ -3,9 +3,9 @@ import { useAppSelector } from '@/app/AppStore';
 import { useGetTopNewsQuery } from '@/entities/news/api/newsApi';
 import { selectFilters, selectTopNews } from '@/entities/news/model/newsSlice';
 import styles from './styles.module.scss';
-import NewsCard from '@/entities/news/ui/newsCard/NewsCard';
 import Skeleton from '@/shared/ui/skeleton/Skeleton';
 import Error from '@/shared/ui/error/Error';
+import { NewsCard } from '@/entities';
 
 const TopNews = () => {
   const filters = useAppSelector(selectFilters);
@@ -36,13 +36,13 @@ const TopNews = () => {
 
   if (news.length) {
     return (
-      <div className={styles.news}>
+      <section className={styles.news}>
         <div className={styles.news__wrap}>
           {news.slice(0, 11).map((news, i) => (
             <NewsCard key={news.title + i} news={news} type="top" />
           ))}
         </div>
-      </div>
+      </section>
     );
   }
 };

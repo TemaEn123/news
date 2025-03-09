@@ -1,7 +1,8 @@
+import { Article } from '@/entities';
 import React from 'react';
 
 const ArticlePage = () => {
-  return <div>ArticlePage</div>;
+  return <Article />;
 };
 
 export default ArticlePage;

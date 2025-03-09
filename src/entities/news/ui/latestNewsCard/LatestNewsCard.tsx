@@ -6,16 +6,17 @@ import { Image } from '@/shared/ui';
 
 interface Props {
   news: INews;
+  handleNewsClick: (news: INews) => void;
 }
 
-const LatestNewsCard = ({ news }: Props) => {
+const LatestNewsCard = ({ news, handleNewsClick }: Props) => {
   return (
-    <div className={styles.card}>
-      <div className={styles.card__img}>
+    <article className={styles.card}>
+      <div className={styles.card__img} onClick={() => handleNewsClick(news)}>
         <Image src={news.urlToImage} alt={news.title} />
       </div>
       <div className={styles.card__info}>
-        <h2>{news.title}</h2>
+        <h2 onClick={() => handleNewsClick(news)}>{news.title}</h2>
         <p className={styles.card__description}>{news.description}</p>
         <p className={styles.card__about}>
           <span>{news.source.name}</span>
@@ -25,7 +26,7 @@ const LatestNewsCard = ({ news }: Props) => {
           <span>{formatTimeSincePublication(news.publishedAt)}</span>
         </p>
       </div>
-    </div>
+    </article>
   );
 };
 

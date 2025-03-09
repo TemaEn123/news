@@ -8,6 +8,7 @@ interface INewsState {
   news: INews[];
   topNews: INews[];
   currentNews: INews | null;
+  searchNews: INews[];
   filters: IFilters;
 }
 
@@ -15,6 +16,7 @@ const initialState: INewsState = {
   news: [],
   topNews: [],
   currentNews: null,
+  searchNews: [],
   filters: {
     pageSizeTop: PAGE_SIZE_TOP,
     pageSizeLatest: PAGE_SIZE_LATEST,
@@ -39,6 +41,9 @@ export const newsSlice = createSlice({
     setCurrentNews: (state, action: PayloadAction<INews>) => {
       state.currentNews = action.payload;
     },
+    setSearchNews: (state, action: PayloadAction<INews[]>) => {
+      state.searchNews = action.payload;
+    },
     setFilters: (state, action: PayloadAction<['q' | 'category', Category | 'in']>) => {
       if (action.payload[1] === 'in') {
         state.filters['q'] = action.payload[1];
@@ -49,11 +54,12 @@ export const newsSlice = createSlice({
   },
 });
 
-export const { setNews, setTopNews, setCurrentNews, setFilters } = newsSlice.actions;
+export const { setNews, setTopNews, setCurrentNews, setFilters, setSearchNews } = newsSlice.actions;
 
 export const selectNews = (state: RootState) => state.news.news;
 export const selectTopNews = (state: RootState) => state.news.topNews;
 export const selectCurrentNews = (state: RootState) => state.news.currentNews;
+export const selectSearchNews = (state: RootState) => state.news.searchNews;
 export const selectFilters = (state: RootState) => state.news.filters;
 
 export default newsSlice.reducer;

@@ -1,0 +1,32 @@
+.news {
+  cursor: pointer;
+  display: flex;
+  transition: background-color 0.3s ease 0s;
+  &:hover {
+    background-color: #f8f6f6;
+  }
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  &__img {
+    max-width: 90px;
+    width: 100%;
+    position: relative;
+    padding-bottom: 18%;
+    margin-right: 10px;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    line-height: 140%;
+    font-size: 12px;
+    & p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+}

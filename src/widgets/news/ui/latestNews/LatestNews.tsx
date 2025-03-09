@@ -3,12 +3,12 @@ import { useAppSelector } from '@/app/AppStore';
 import { useGetNewsQuery } from '@/entities/news/api/newsApi';
 import { selectFilters, selectNews } from '@/entities/news/model/newsSlice';
 import styles from './styles.module.scss';
-import NewsCard from '@/entities/news/ui/newsCard/NewsCard';
 import Skeleton from '@/shared/ui/skeleton/Skeleton';
 import Error from '@/shared/ui/error/Error';
 import { MAX_COUNT_OF_PAGES, PAGE_SIZE_LATEST } from '@/shared/constants';
 import { Pagination } from '@/features/pagination';
 import { useLocation } from 'react-router-dom';
+import { NewsCard } from '@/entities';
 
 const LatestNews = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -66,7 +66,7 @@ const LatestNews = () => {
 
   if (news.length) {
     return (
-      <div className={styles.news}>
+      <section className={styles.news}>
         {news.slice(0, 14).map((news, i) => (
           <NewsCard key={news.title + i} news={news} type="latest" />
         ))}
@@ -77,7 +77,7 @@ const LatestNews = () => {
           count={countOfPages}
           currentPage={currentPage}
         />
-      </div>
+      </section>
     );
   }
 };

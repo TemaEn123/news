@@ -1,8 +1,9 @@
 .search {
   font-family: Roboto;
   font-size: 14px;
-  max-width: 210px;
+  max-width: 350px;
   width: 100%;
+  position: relative;
   & form {
     display: flex;
     align-items: center;
@@ -11,6 +12,27 @@
       margin-left: 3px;
       border-bottom: 1px solid #575757;
       padding: 5px;
+    }
+  }
+  &__items {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    min-height: 40px;
+    top: 150%;
+    min-width: 350px;
+    right: 0;
+    z-index: 1;
+    padding: 10px;
+    -webkit-box-shadow: 0px 17px 23px 6px rgba(34, 60, 80, 0.12);
+    -moz-box-shadow: 0px 17px 23px 6px rgba(34, 60, 80, 0.12);
+    box-shadow: 0px 17px 23px 6px rgba(34, 60, 80, 0.12);
+    scrollbar-width: thin;
+    & > p {
+      font-size: 16px;
+      text-align: center;
     }
   }
 }
