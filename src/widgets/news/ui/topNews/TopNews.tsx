@@ -5,15 +5,16 @@ import { selectFilters, selectTopNews } from '@/entities/news/model/newsSlice';
 import styles from './styles.module.scss';
 import NewsCard from '@/entities/news/ui/newsCard/NewsCard';
 import Skeleton from '@/shared/ui/skeleton/Skeleton';
+import Error from '@/shared/ui/error/Error';
 
 const TopNews = () => {
   const filters = useAppSelector(selectFilters);
 
-  const { error, isLoading } = useGetTopNewsQuery(filters);
+  const { error, isFetching } = useGetTopNewsQuery(filters);
 
   const news = useAppSelector(selectTopNews);
 
-  if (isLoading) {
+  if (isFetching) {
     return (
       <div className={styles.news}>
         <div className={styles.news__wrap}>
@@ -24,7 +25,13 @@ const TopNews = () => {
   }
 
   if (error) {
-    return <div className={styles.news}>ERRORS</div>;
+    console.log(error);
+
+    return (
+      <div className={styles.news}>
+        <Error />
+      </div>
+    );
   }
 
   if (news.length) {
