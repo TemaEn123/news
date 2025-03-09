@@ -6,6 +6,7 @@
     margin-bottom: 10px;
   }
   &__img {
+    cursor: pointer;
     flex: 0 0 30%;
     padding-bottom: 20%;
     margin-right: 10px;
@@ -14,9 +15,14 @@
   &__info {
     flex: 0 0 70%;
     & h2 {
+      cursor: pointer;
       font-size: 14px;
       margin-bottom: 5px;
       line-height: 160%;
+      transition: opacity 0.3s ease 0s;
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
   &__description {

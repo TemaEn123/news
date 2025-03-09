@@ -15,7 +15,7 @@ const AppRouter = () => {
           <Route
             index
             element={
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Loading fontSize={50} />}>
                 <LazyMainPage />
               </Suspense>
             }
@@ -23,7 +23,7 @@ const AppRouter = () => {
           <Route
             path="category/:cat"
             element={
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Loading fontSize={50} />}>
                 <LazyCategoryPage />
               </Suspense>
             }
@@ -31,7 +31,7 @@ const AppRouter = () => {
           <Route
             path="news/:id"
             element={
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Loading fontSize={50} />}>
                 <LazyArticlePage />
               </Suspense>
             }

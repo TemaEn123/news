@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IFilters, INewsApiResponse } from '../model/interfaces';
-import { setNews, setTopNews } from '../model/newsSlice';
+import { setNews, setSearchNews, setTopNews } from '../model/newsSlice';
+import { PAGE_SIZE_SEARCH } from '@/shared/constants';
 
 const BASE_API_URL = process.env.BASE_API_URL;
 const API_KEY = process.env.API_KEY;
@@ -62,7 +63,32 @@ export const newsApi = createApi({
         };
       },
     }),
+    getSearchNews: builder.query<INewsApiResponse, string>({
+      query: (title) => {
+        return {
+          url: 'everything',
+          params: {
+            apiKey: API_KEY,
+            searchIn: 'title',
+            q: title,
+            pageSize: PAGE_SIZE_SEARCH,
+          },
+        };
+      },
+      keepUnusedDataFor: 0,
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        const result = await queryFulfilled;
+        const data = result.data;
+
+        dispatch(setSearchNews(data.articles));
+      },
+    }),
   }),
 });
 
-export const { useGetNewsQuery, useGetTopNewsQuery, useGetCurrentNewsQuery } = newsApi;
+export const {
+  useGetNewsQuery,
+  useGetTopNewsQuery,
+  useGetCurrentNewsQuery,
+  useGetSearchNewsQuery,
+} = newsApi;

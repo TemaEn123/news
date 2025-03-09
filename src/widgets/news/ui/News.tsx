@@ -23,10 +23,10 @@ const News = () => {
   }
 
   return (
-    <section className={styles.news}>
+    <div className={styles.news}>
       <TopNews />
       <LatestNews />
-    </section>
+    </div>
   );
 };
 
