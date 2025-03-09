@@ -1,7 +1,8 @@
+import { News } from '@/widgets/news';
 import React from 'react';
 
 const CategoryPage = () => {
-  return <div>CategoryPage</div>;
+  return <News />;
 };
 
 export default CategoryPage;

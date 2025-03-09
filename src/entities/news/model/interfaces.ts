@@ -1,5 +1,3 @@
-import { categories } from '@/shared/constants';
-
 export interface INews {
   source: {
     name: string;
@@ -13,10 +11,17 @@ export interface INews {
   content: string;
 }
 
-export type Category = (typeof categories)[number];
+export type Category =
+  | 'business'
+  | 'entertainment'
+  | 'general'
+  | 'health'
+  | 'science'
+  | 'sports'
+  | 'technology';
 
 export interface IFilters {
-  page: number;
+  page?: number;
   pageSizeTop: number;
   pageSizeLatest: number;
   category: Category | null;
