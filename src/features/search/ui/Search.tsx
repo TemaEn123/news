@@ -63,7 +63,7 @@ const Search = () => {
       {showItems && (
         <div className={styles.search__items}>
           {isFetching || debouncedSearch === '' ? (
-            <Loading fontSize={30} />
+            <Loading modif="dark" fontSize={30} />
           ) : error ? (
             <Error />
           ) : !news.length ? (

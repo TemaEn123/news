@@ -15,7 +15,7 @@ const SearchNewsCard = memo(({ news, handleNewsClick }: Props) => {
         <Image src={news.urlToImage} alt={news.title} />
       </div>
       <div className={styles.news__info}>
-        <h3>{news.title}</h3>
+        <h3 className="dark">{news.title}</h3>
       </div>
     </article>
   );

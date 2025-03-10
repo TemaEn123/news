@@ -6,7 +6,7 @@ const HeaderCenter = () => {
   return (
     <div className={styles.headerCenter}>
       <Link to=".">
-        <h1>The News</h1>
+        <h1 className="white">The News</h1>
       </Link>
     </div>
   );

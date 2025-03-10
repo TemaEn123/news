@@ -51,7 +51,7 @@ const Article = () => {
             </div>
             <div className={styles.article__info}>
               <p>{news.content}</p>
-              <a target="_blank" rel="noreferrer" href={news.url}>
+              <a className="white" target="_blank" rel="noreferrer" href={news.url}>
                 Read more...
               </a>
             </div>

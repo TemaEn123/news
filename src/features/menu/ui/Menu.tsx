@@ -12,7 +12,7 @@ const Menu = () => {
         {categories.map((cat) => (
           <li key={cat}>
             <NavLink
-              className={`${styles.menu__link} ${params.cat === cat ? styles.menu__link_active : null}`}
+              className={`${styles.menu__link} ${params.cat === cat ? styles.menu__link_active : null} white`}
               to={`category/${cat}`}
             >
               {cat}
