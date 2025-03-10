@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { INews } from '../../model/interfaces';
 import LatestNewsCard from '../latestNewsCard/LatestNewsCard';
 import TopNewsCard from '../topNewsCard/TopNewsCard';
@@ -14,18 +14,21 @@ interface Props {
   handleSearchNewsClick?: () => void;
 }
 
-const NewsCard = ({ news, type, handleSearchNewsClick }: Props) => {
+const NewsCard = memo(({ news, type, handleSearchNewsClick }: Props) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleNewsClick = (news: INews): void => {
-    if (type === 'search') {
-      handleSearchNewsClick();
-    }
-    dispatch(setCurrentNews(news));
-    const pathFromTitle = formatTitleToUrl(news.title);
-    navigate(`/news/${pathFromTitle}`);
-  };
+  const handleNewsClick = useCallback(
+    (news: INews): void => {
+      if (type === 'search') {
+        handleSearchNewsClick();
+      }
+      dispatch(setCurrentNews(news));
+      const pathFromTitle = formatTitleToUrl(news.title);
+      navigate(`/news/${pathFromTitle}`);
+    },
+    [type]
+  );
 
   switch (type) {
     case 'latest':
@@ -35,6 +38,8 @@ const NewsCard = ({ news, type, handleSearchNewsClick }: Props) => {
     case 'search':
       return <SearchNewsCard handleNewsClick={handleNewsClick} news={news} />;
   }
-};
+});
 
-export default NewsCard;
+NewsCard.displayName = 'NewsCard';
+
+export default React.memo(NewsCard);

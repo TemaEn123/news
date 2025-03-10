@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { SearchIcon } from '@/shared/assets';
 import styles from './styles.module.scss';
 import { useGetSearchNewsQuery } from '@/entities/news/api/newsApi';
@@ -9,6 +9,7 @@ import { Loading } from '@/shared/ui';
 import Error from '@/shared/ui/error/Error';
 import { useClickOutside } from '@/shared/hooks/useClickOutside';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useSearch } from '@/shared/hooks/useSearch';
 
 const Search = () => {
   const [search, setSearch] = useState<string>('');
@@ -24,29 +25,24 @@ const Search = () => {
 
   const news = useAppSelector(selectSearchNews);
 
-  const handleInputChange = (value: string): void => {
-    setSearch(value);
-    if (value) {
-      setShowItems(true);
-    } else {
-      setShowItems(false);
-    }
-  };
-
-  const handleInputFocus = () => {
-    if (search) {
-      setShowItems(true);
-    } else {
-      setShowItems(false);
-    }
-  };
-
-  const handleSearchNewsClick = () => {
-    setShowItems(false);
-    setSearch('');
-  };
+  const [handleInputChange, handleInputFocus, handleSearchNewsClick] = useSearch(
+    setSearch,
+    setShowItems,
+    search
+  );
 
   useClickOutside(searchItemsRef, () => setShowItems(false), showItems);
+
+  const filteredNews = useMemo(() => {
+    return news.map((news, i) => (
+      <NewsCard
+        handleSearchNewsClick={handleSearchNewsClick}
+        key={news.title + i}
+        news={news}
+        type="search"
+      />
+    ));
+  }, [news, handleSearchNewsClick]);
 
   if (error) {
     console.log(error);
@@ -73,14 +69,7 @@ const Search = () => {
           ) : !news.length ? (
             <p>Not found...</p>
           ) : (
-            news.map((news, i) => (
-              <NewsCard
-                handleSearchNewsClick={handleSearchNewsClick}
-                key={news.title + i}
-                news={news}
-                type="search"
-              />
-            ))
+            filteredNews
           )}
         </div>
       )}

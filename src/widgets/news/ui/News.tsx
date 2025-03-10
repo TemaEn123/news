@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles.module.scss';
 import TopNews from './topNews/TopNews';
 import LatestNews from './latestNews/LatestNews';
@@ -12,13 +12,17 @@ const News = () => {
 
   const dispatch = useAppDispatch();
 
-  if (!params.cat) {
-    dispatch(setFilters(['q', 'in']));
-    dispatch(setFilters(['category', null]));
-  } else if (isCategory(params.cat)) {
-    dispatch(setFilters(['q', params.cat]));
-    dispatch(setFilters(['category', params.cat]));
-  } else {
+  useEffect(() => {
+    if (!params.cat) {
+      dispatch(setFilters(['q', 'in']));
+      dispatch(setFilters(['category', null]));
+    } else if (isCategory(params.cat)) {
+      dispatch(setFilters(['q', params.cat]));
+      dispatch(setFilters(['category', params.cat]));
+    }
+  }, [params.cat, dispatch]);
+
+  if (params.cat && !isCategory(params.cat)) {
     return <Navigate to="/404" replace />;
   }
 
