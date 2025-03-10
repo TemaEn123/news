@@ -17,8 +17,8 @@ const TopNewsCard = memo(({ news, handleNewsClick }: Props) => {
       </div>
       <div className={styles.card__info}>
         <h2 onClick={() => handleNewsClick(news)}>{news.title}</h2>
-        <p className={styles.card__description}>{news.description}</p>
-        <p className={styles.card__about}>
+        <p className={`${styles.card__description} white`}>{news.description}</p>
+        <p className={`${styles.card__about} white`}>
           <span>{news.source.name}</span>
           <span>/</span>
           <span>{news.author}</span>

@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Image = memo(({ src, alt }: Props) => {
-  return <img className={styles.image} src={src} alt={alt} />;
+  return <img className={`${styles.image} dark`} src={src} alt={alt} />;
 });
 
 Image.displayName = 'Image';
