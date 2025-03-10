@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { INews } from '../../model/interfaces';
 import styles from './styles.module.scss';
 import { Image } from '@/shared/ui';
@@ -9,7 +9,7 @@ interface Props {
   handleNewsClick: (news: INews) => void;
 }
 
-const TopNewsCard = ({ news, handleNewsClick }: Props) => {
+const TopNewsCard = memo(({ news, handleNewsClick }: Props) => {
   return (
     <article className={styles.card}>
       <div className={styles.card__img} onClick={() => handleNewsClick(news)}>
@@ -28,6 +28,8 @@ const TopNewsCard = ({ news, handleNewsClick }: Props) => {
       </div>
     </article>
   );
-};
+});
 
-export default TopNewsCard;
+TopNewsCard.displayName = 'TopNewsCard';
+
+export default React.memo(TopNewsCard);

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '@/app/AppStore';
 import { useGetNewsQuery } from '@/entities/news/api/newsApi';
 import { selectFilters, selectNews } from '@/entities/news/model/newsSlice';
 import styles from './styles.module.scss';
 import Skeleton from '@/shared/ui/skeleton/Skeleton';
 import Error from '@/shared/ui/error/Error';
-import { MAX_COUNT_OF_PAGES, PAGE_SIZE_LATEST } from '@/shared/constants';
 import { Pagination } from '@/features/pagination';
 import { useLocation } from 'react-router-dom';
 import { NewsCard } from '@/entities';
+import { calculateCountOfPages } from '@/shared/helpers/calculateCountOfPages';
+import { usePagination } from '@/shared/hooks/usePagination';
 
 const LatestNews = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,28 +24,20 @@ const LatestNews = () => {
 
   const { data, error, isFetching } = useGetNewsQuery({ ...filters, page: currentPage });
 
-  const countOfPages: number =
-    Math.ceil(data?.totalResults / PAGE_SIZE_LATEST) > MAX_COUNT_OF_PAGES
-      ? MAX_COUNT_OF_PAGES
-      : Math.ceil(data?.totalResults / PAGE_SIZE_LATEST);
+  const countOfPages: number = useMemo(
+    () => calculateCountOfPages(data?.totalResults),
+    [data?.totalResults]
+  );
 
   const news = useAppSelector(selectNews);
 
-  const handlePrevPageClick = (): void => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
+  const displayedNews = useMemo(() => news.slice(0, 14), [news]);
 
-  const handleNextPageClick = (): void => {
-    if (currentPage < countOfPages) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
-
-  const handlePageClick = (page: number): void => {
-    setCurrentPage(page);
-  };
+  const [handleNextPageClick, handlePageClick, handlePrevPageClick] = usePagination(
+    currentPage,
+    countOfPages,
+    setCurrentPage
+  );
 
   if (isFetching) {
     return (
@@ -64,10 +57,10 @@ const LatestNews = () => {
     );
   }
 
-  if (news.length) {
+  if (displayedNews.length) {
     return (
       <section className={styles.news}>
-        {news.slice(0, 14).map((news, i) => (
+        {displayedNews.map((news, i) => (
           <NewsCard key={news.title + i} news={news} type="latest" />
         ))}
         <Pagination

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   type: 'latest' | 'top' | 'article';
 }
 
-const Skeleton = ({ type, count }: Props) => {
+const Skeleton = memo(({ type, count }: Props) => {
   const skeletonType =
     type === 'latest'
       ? styles.skeleton_latest
@@ -23,6 +23,8 @@ const Skeleton = ({ type, count }: Props) => {
       ))}
     </>
   );
-};
+});
 
-export default Skeleton;
+Skeleton.displayName = 'Skeleton';
+
+export default React.memo(Skeleton);

@@ -17,12 +17,16 @@ const Article = () => {
   const { data: loadingNews, isLoading, error } = useGetCurrentNewsQuery(params.id, { skip });
 
   useEffect(() => {
-    if (!news && !isLoading && !error && loadingNews) {
+    const haveCurrentNews = !news && !isLoading && !error && loadingNews;
+
+    if (haveCurrentNews) {
       dispatch(setCurrentNews(loadingNews.articles[0]));
     }
   }, [news, loadingNews, isLoading, error, dispatch]);
 
-  if (!loadingNews?.articles.length && !error && !isLoading && !news) {
+  const isNotFound = !loadingNews?.articles.length && !error && !isLoading && !news;
+
+  if (isNotFound) {
     return <Navigate to="/404" replace />;
   }
 

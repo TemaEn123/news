@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useAppSelector } from '@/app/AppStore';
 import { useGetTopNewsQuery } from '@/entities/news/api/newsApi';
 import { selectFilters, selectTopNews } from '@/entities/news/model/newsSlice';
@@ -13,6 +13,8 @@ const TopNews = () => {
   const { error, isFetching } = useGetTopNewsQuery(filters);
 
   const news = useAppSelector(selectTopNews);
+
+  const displayedNews = useMemo(() => news.slice(0, 11), [news]);
 
   if (isFetching) {
     return (
@@ -38,7 +40,7 @@ const TopNews = () => {
     return (
       <section className={styles.news}>
         <div className={styles.news__wrap}>
-          {news.slice(0, 11).map((news, i) => (
+          {displayedNews.map((news, i) => (
             <NewsCard key={news.title + i} news={news} type="top" />
           ))}
         </div>
