@@ -4,12 +4,13 @@ import styles from './styles.module.scss';
 
 interface Props {
   fontSize: number;
+  modif?: 'dark';
 }
 
-const Loading = memo(({ fontSize }: Props) => {
+const Loading = memo(({ fontSize, modif }: Props) => {
   return (
     <div className={styles.loading}>
-      <LoadingIcon fontSize={fontSize} />
+      <LoadingIcon className={modif ? modif : null} fontSize={fontSize} />
     </div>
   );
 });
