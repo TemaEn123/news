@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './styles.module.scss';
 
 interface Props {
@@ -6,8 +6,10 @@ interface Props {
   alt: string;
 }
 
-const Image = ({ src, alt }: Props) => {
+const Image = memo(({ src, alt }: Props) => {
   return <img className={styles.image} src={src} alt={alt} />;
-};
+});
 
-export default Image;
+Image.displayName = 'Image';
+
+export default React.memo(Image);
