@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu Component matches snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="menu"
+  >
+    <ul>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/business"
+        >
+          business
+        </a>
+      </li>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/entertainment"
+        >
+          entertainment
+        </a>
+      </li>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/general"
+        >
+          general
+        </a>
+      </li>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/health"
+        >
+          health
+        </a>
+      </li>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/science"
+        >
+          science
+        </a>
+      </li>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/sports"
+        >
+          sports
+        </a>
+      </li>
+      <li>
+        <a
+          class="menu__link null white"
+          href="/category/technology"
+        >
+          technology
+        </a>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
