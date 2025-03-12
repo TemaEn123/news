@@ -1,5 +1,5 @@
-export function formatTimeSincePublication(isoDateString: string): string {
-  const publicationDate = new Date(isoDateString);
+export function formatTimeSincePublication(isDateString: string): string {
+  const publicationDate = new Date(isDateString);
   const currentDate = new Date();
 
   const timeDifference = currentDate.getTime() - publicationDate.getTime();
