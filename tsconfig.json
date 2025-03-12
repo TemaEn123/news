@@ -5,6 +5,8 @@
     "module": "ESNext",
     "target": "es5",
     "jsx": "react-jsx",
+    "types": ["jest", "@testing-library/jest-dom"],
+    "skipLibCheck": true,
     "allowJs": true,
     "moduleResolution": "node",
     // esModuleInterop позволяет работать с пакетами, которые используют

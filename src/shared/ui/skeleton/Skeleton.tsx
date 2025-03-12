@@ -17,8 +17,8 @@ const Skeleton = memo(({ type, count }: Props) => {
   return (
     <>
       {[...Array(count)].map((_, i) => (
-        <div className={`${styles.skeleton} ${skeletonType}`} key={i}>
-          <div className={styles.skeleton__inside} />
+        <div data-testid="skeleton" className={`${styles.skeleton} ${skeletonType}`} key={i}>
+          <div data-testid="skeleton-inside" className={styles.skeleton__inside} />
         </div>
       ))}
     </>
