@@ -7,7 +7,8 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import path from "path";
 import CopyPlugin from "copy-webpack-plugin";
-import Dotenv from "dotenv-webpack"
+// import Dotenv from "dotenv-webpack"
+import dotenv from 'dotenv';
 
 export function buildPlugins({
   mode,
@@ -18,13 +19,23 @@ export function buildPlugins({
   const isDev = mode === "development";
   const isProd = mode === "production";
 
+  // Загружаем переменные окружения из .env файла
+  const env = dotenv.config().parsed ?? {}; // Используем пустой объект по умолчанию
+
+  // Преобразуем переменные окружения в объект для DefinePlugin
+  const envKeys = Object.keys(env).reduce<Record<string, string>>((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+  }, {});
+
   const plugins: Configuration["plugins"] = [
     new HtmlWebpackPlugin({ template: paths.html }),
     new DefinePlugin({
       __PLATFORM__: JSON.stringify(platform),
       __ENV__: JSON.stringify(mode),
     }),
-    new Dotenv(),
+    // new Dotenv(),
+    new webpack.DefinePlugin(envKeys),
   ];
 
   if (isDev) {
