@@ -3,8 +3,8 @@ import { IFilters, INewsApiResponse } from '../model/interfaces';
 import { setNews, setSearchNews, setTopNews } from '../model/newsSlice';
 import { PAGE_SIZE_SEARCH } from '@/shared/constants';
 
-const BASE_API_URL = process.env.BASE_API_URL;
-const API_KEY = process.env.API_KEY;
+const BASE_API_URL = 'https://newsapi.org/v2/';
+const API_KEY = '30c9e0dc89fd41118657a15e846c3ab0';
 
 export const newsApi = createApi({
   reducerPath: 'newsApi',
